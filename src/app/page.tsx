@@ -7,7 +7,6 @@ import { BitcoinIcon } from "@/components/Icons";
 export default function Home() {
   return (
     <>
-      {/* Header */}
       <Header />
 
       <main className="mx-8 lg:mx-20 xl:mx-60 mt-2 md:mt-12">
@@ -38,7 +37,6 @@ export default function Home() {
           </h1>
         </div>
 
-        {/* Blog listing */}
         <BlogListing />
       </main>
     </>
