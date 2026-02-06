@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint src",
+    "prettier": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
+    "build": "npm run lint && npm run prettier && next build"
   },
   "dependencies": {
     "dotenv": "^17.2.4",
     "next": "16.1.6",
+    "prettier": "^3.8.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },

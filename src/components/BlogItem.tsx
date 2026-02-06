@@ -31,11 +31,13 @@ export const BlogItem = ({ data, firstPost }: Props) => {
                 : "(min-width: 768px) 33vw, 100vw"
             }
             className="object-cover"
+            placeholder="blur"
+            blurDataURL="/placeholder.webp"
           />
         )}
       </div>
 
-      <div className="flex mt-4 font-helvetica text-sm opacity-30 gap-2">
+      <div className="flex mt-4 font-helvetica text-xs opacity-80 gap-2">
         <span>{data.source}</span>
         <span>•</span>
         <span>{getDateByTimestamp(data.datetime)}</span>
