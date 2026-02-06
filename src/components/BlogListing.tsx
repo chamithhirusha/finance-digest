@@ -1,13 +1,8 @@
+import { TNewsArticle } from "@/utils/types";
 import { BlogItem } from "./BlogItem";
 
-interface BlogData {
-  imageUrl?: string;
-  title: string;
-  href: string;
-}
-
 interface BlogListingProps {
-  blogData: BlogData[];
+  blogData: TNewsArticle[];
 }
 
 export const BlogListing = ({ blogData }: BlogListingProps) => (
@@ -16,18 +11,18 @@ export const BlogListing = ({ blogData }: BlogListingProps) => (
       index === 0 ? (
         <div key={`blog-${index}`} className="md:col-span-2">
           <BlogItem
-            imageUrl={blog.imageUrl}
-            title={blog.title}
-            href={blog.href}
+            imageUrl={blog.image}
+            title={blog.headline}
+            href={blog.url}
             firstPost
           />
         </div>
       ) : (
         <BlogItem
           key={`blog-${index}`}
-          imageUrl={blog.imageUrl}
-          title={blog.title}
-          href={blog.href}
+          imageUrl={blog.image}
+          title={blog.headline}
+          href={blog.url}
         />
       ),
     )}
