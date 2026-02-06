@@ -1,6 +1,6 @@
-import { TNewsArticle } from "./types";
+import { TBlog } from "./types";
 
-export const getNews = async (): Promise<TNewsArticle[]> => {
+export const getNews = async (): Promise<TBlog[]> => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -8,15 +8,12 @@ export const getNews = async (): Promise<TNewsArticle[]> => {
     throw new Error("Missing API configuration");
   }
 
-  const response = await fetch(
-    `${apiUrl}?category=general&token=${apiKey}`,
-    {
-      next: { revalidate: 1800 },
-    }
-  );
+  const response = await fetch(`${apiUrl}?category=general&token=${apiKey}`, {
+    next: { revalidate: 1800 },
+  });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch news: ${response.status}`);
+    throw new Error(`Failed to fetch blog data: ${response.status}`);
   }
 
   return response.json();
