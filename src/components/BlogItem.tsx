@@ -1,52 +1,60 @@
+import Image from "next/image";
 import { TopRightArrowIcon } from "./Icons";
+import { getDateByTimestamp } from "@/utils/date";
+import { TBlog } from "@/utils/types";
 
-interface BlogItemProps {
-  imageUrl?: string;
-  title: string;
-  href: string;
+interface Props {
+  data: TBlog;
   firstPost?: boolean;
 }
 
-const imageHeight = (firstPost?: boolean) => {
-  if (firstPost) return "h-64 md:h-96";
-  return "h-64";
-};
+export const BlogItem = ({ data, firstPost }: Props) => {
+  const imgHeight = firstPost ? "h-64 md:h-96" : "h-64";
+  const titleClass = firstPost ? "md:w-2/3" : "";
 
-const titleWidth = (firstPost?: boolean) => {
-  if (firstPost) return "md:tw-2/3";
-  return "";
-};
-
-export const BlogItem = ({
-  imageUrl,
-  title,
-  href,
-  firstPost,
-}: BlogItemProps) => (
-  <article>
-    {imageUrl ? (
-      <img
-        src={imageUrl}
-        alt={title}
-        className={`${imageHeight(firstPost)} w-full object-cover rounded-md`}
-      />
-    ) : (
+  return (
+    <article>
       <div
-        className={`${imageHeight(firstPost)} flex items-center justify-center w-full bg-gray-700 rounded-md`}
-      />
-    )}
-    <h2 className={`text-xl mt-4 leading-tight ${titleWidth(firstPost)}`}>
-      {title}
-    </h2>
-    <a
-      href={href}
-      className="flex items-center mt-4 group"
-      aria-label={`Read article: ${title}`}
-    >
-      <span className="text-sm underline underline-offset-10 leading-relaxed transition-colors group-hover:text-blue-400">
-        Read Article
-      </span>
-      <TopRightArrowIcon className="h-5 w-5 ml-3 transition-transform group-hover:translate-x-1 group-hover:rotate-10 group-hover:-translate-y-1 duration-300" />
-    </a>
-  </article>
-);
+        className={`relative w-full ${imgHeight} overflow-hidden rounded-md ${
+          !data.image ? "flex items-center justify-center bg-gray-700" : ""
+        }`}
+      >
+        {data.image && (
+          <Image
+            src={data.image}
+            alt={data.headline}
+            fill
+            priority={firstPost}
+            sizes={
+              firstPost
+                ? "(min-width: 768px) 66vw, 100vw"
+                : "(min-width: 768px) 33vw, 100vw"
+            }
+            className="object-cover"
+          />
+        )}
+      </div>
+
+      <div className="flex mt-4 font-helvetica text-sm opacity-30 gap-2">
+        <span>{data.source}</span>
+        <span>•</span>
+        <span>{getDateByTimestamp(data.datetime)}</span>
+      </div>
+
+      <h2 className={`text-xl mt-4 leading-tight ${titleClass}`}>
+        {data.headline}
+      </h2>
+
+      <a
+        href={data.url}
+        className="flex items-center mt-4 group"
+        aria-label={`Read article: ${data.headline}`}
+      >
+        <span className="text-sm underline underline-offset-10 leading-relaxed transition-colors group-hover:text-blue-400">
+          Read Article
+        </span>
+        <TopRightArrowIcon className="h-5 w-5 ml-3 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:rotate-10" />
+      </a>
+    </article>
+  );
+};

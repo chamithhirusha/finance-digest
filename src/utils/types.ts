@@ -1,4 +1,4 @@
-export type TNewsArticle = {
+export type TBlog = {
   category: string;
   datetime: number;
   headline: string;
