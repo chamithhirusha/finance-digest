@@ -30,7 +30,7 @@ export default function Home() {
 
       <main className="mx-8 lg:mx-20 xl:mx-60 mt-2 md:mt-12">
         {/* Desktop title */}
-        <div className="hidden md:block">
+        <div className="hidden md:block" data-testid="desktop-title">
           <h1 className="font-helvetica md:text-6xl xl:text-7xl uppercase">
             Latest news
           </h1>
@@ -49,7 +49,7 @@ export default function Home() {
         </div>
 
         {/* Mobile title */}
-        <div className="block md:hidden">
+        <div className="block md:hidden" data-testid="mobile-title">
           <h1 className="font-noto-serif text-3xl uppercase w-10/12">
             Latest news from the world of{" "}
             <span className="font-roboto">Finance</span>
