@@ -71,7 +71,7 @@ export const BlogListing = () => {
   return (
     <div className="flex flex-col">
       {/* Sort button */}
-      <div className="flex justify-end gap-5">
+      {visibleBlogs.length > 0 && <div className="flex justify-end gap-5">
         <button
           aria-label="Toggle sort order"
           onClick={() =>
@@ -88,7 +88,7 @@ export const BlogListing = () => {
             {sortOrder === "latest" ? "Latest to older" : "Older to latest"}
           </span>
         </button>
-      </div>
+      </div>}
 
       <div className="flex flex-col">
         {/* Error alert */}
